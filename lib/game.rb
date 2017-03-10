@@ -18,6 +18,7 @@ class Game
     else
       switch
     end
+    board.grid
   end
   
   private
@@ -27,10 +28,6 @@ class Game
   end
   
   def set_current_player
-    # TODO remove this hard coding- turn it into a random selection
-    players.each do |player|
-      @current_player = player if player.marker == :X
-      @other_player = player if player.marker == :O
-    end
+    @current_player, @other_player = players.shuffle
   end
 end

@@ -6,6 +6,10 @@ describe Game do
   
   let(:board)     { double :board }
   
+  before do
+    allow_any_instance_of(Array).to receive(:shuffle) { [player_X, player_O] }
+  end
+  
   it "starts with two players" do
     expect(game.players).to eq [player_X, player_O]
   end
@@ -22,6 +26,7 @@ describe Game do
     before do
       allow(board).to receive(:set)
       allow(board).to receive(:game_over)
+      allow(board).to receive(:grid)
       game.take_turn(1, 2)
     end
   
