@@ -16,11 +16,11 @@ class Board
   end
     
   def game_over
-    return "It's a draw" if check_draw
     winner = check_winner
     if winner
       "Winner is #{winner}"
     else
+      return "It's a draw" if check_draw
       false
     end
   end
