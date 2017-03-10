@@ -6,10 +6,6 @@ describe Game do
   
   let(:board)     { double :board }
   
-  before do
-    allow(board).to receive(:set)
-  end
-  
   it "starts with two players" do
     expect(game.players).to eq [player_X, player_O]
   end
@@ -22,13 +18,23 @@ describe Game do
     expect(game.board).to eq board
   end
   
-  it "player can take their turn" do
-    game.take_turn(1, 2)
-    expect(board).to have_received(:set).with(1, 2, :X)
-  end
+  describe "#take_turn" do
+    before do
+      allow(board).to receive(:set)
+      allow(board).to receive(:game_over)
+      game.take_turn(1, 2)
+    end
   
-  it "switches current player after take_turn" do
-    game.take_turn(1, 2)
-    expect(game.current_player).to eq player_O
+    it "player can take their turn" do
+      expect(board).to have_received(:set).with(1, 2, :X)
+    end
+    
+    it "switches current player after take_turn" do
+      expect(game.current_player).to eq player_O
+    end
+    
+    it "checks for a finished game" do
+      expect(board).to have_received(:game_over)
+    end
   end
 end

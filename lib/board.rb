@@ -16,6 +16,7 @@ class Board
   end
     
   def game_over
+    return "It's a draw" if check_draw
     winner = check_winner
     if winner
       "Winner is #{winner}"
@@ -41,6 +42,10 @@ class Board
       end
     end
     false
+  end
+  
+  def check_draw
+    !grid.flatten.include?("")
   end
   
   def diagonals

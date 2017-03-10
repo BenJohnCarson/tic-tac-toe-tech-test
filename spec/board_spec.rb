@@ -51,5 +51,11 @@ describe Board do
       board = Board.new(grid)
       expect(board.game_over).to eq "Winner is X"
     end
+    
+    it "can check for a draw" do
+      grid = [[:X, :O, :X],[:O,:O,:X],[:X,:X,:O]]
+      board = Board.new(grid)
+      expect(board.game_over).to eq "It's a draw"
+    end
   end
 end

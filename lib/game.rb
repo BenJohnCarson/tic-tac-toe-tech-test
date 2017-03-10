@@ -13,7 +13,11 @@ class Game
   
   def take_turn(x, y)
     board.set(x, y, current_player.marker)
-    switch
+    if board.game_over
+      board.game_over
+    else
+      switch
+    end
   end
   
   private
