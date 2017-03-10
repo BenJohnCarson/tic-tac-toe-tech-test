@@ -37,6 +37,7 @@ class Board
   def check_winner
     return check_rows if !!check_rows
     return check_columns if !!check_columns
+    return check_diagonals if !!check_diagonals
   end
   
   def check_rows
@@ -48,6 +49,14 @@ class Board
   
   def check_columns
     grid.transpose.each do |row|
+      return row[0] if row.all? { |value| value == row[0] && value != "" }
+    end
+    false
+  end
+  
+  def check_diagonals
+    diagonals = [[get(0, 0), get(1, 1), get(2, 2)], [get(0, 2), get(1, 1), get(2, 0)]]
+    diagonals.each do |row|
       return row[0] if row.all? { |value| value == row[0] && value != "" }
     end
     false
