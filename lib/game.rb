@@ -2,17 +2,24 @@ require_relative 'player'
 
 class Game
   
-  attr_reader :players
+  attr_reader :players, :current_player, :other_player
   
-  def initialize(player_class = Player)
-    create_players(player_class)
+  def initialize(players)
+    @players = players
+    set_current_player
   end
+  
+  def switch
+    @current_player, @other_player = @other_player, @current_player
+  end
+    
   
   private
   
-  def create_players(player_class)
-    player_X = player_class.new(:X)
-    player_O = player_class.new(:O)
-    @players = [player_X, player_O]
+  def set_current_player
+    players.each do |player|
+      @current_player = player if player.marker == :X
+      @other_player = player if player.marker == :O
+    end
   end
 end
